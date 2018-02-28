@@ -11,7 +11,7 @@
   </div>
 </template>
 <script>
-import readmemd from '@/assets/doc/readme.md'
+import readmemd from '@/../README.md'
 import HxTree from '@/components/shared/hx-tree'
 import 'github-markdown-css'
 import 'highlight.js/styles/monokai.css'
