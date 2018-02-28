@@ -1,0 +1,120 @@
+.lines {
+  --header-background: #fff;
+  --header-color: #333;
+  --background: #fff;
+  --background-transparent: rgba(255, 255, 255, 0.9);
+  --background-secondary: #fff;
+  --background-tertiary: #fff;
+  --normal: #333;
+  --normal-secondary: #999;
+  --primary: #0be;
+  --primary-darker: #0ae;
+  --primary-lighter: #6080b0;
+  --primary-inverse: #fff;
+  --secondary: #eee;
+  --secondary-inverse: #444;
+  --node-label: #fff;
+  --node-socket: #444;
+  --node-socket--withvalue: #44f;
+  --link-hover: #f00;
+  --selector-background: rgba(0, 0, 200, 0.1);
+  --selector-color: var(--primary);
+  --node-selection: rgba(0, 187, 238, 0.7);
+
+  /* --transition-speed: 0.3s; */
+
+  /* --transition-speed-slow: 0.7s; */
+}
+
+.lines .app-header {
+  box-shadow: none;
+  border-bottom: solid 1px var(--border-color-lighter);
+}
+
+.lines .split .splitter {
+  flex-basis: 1px !important;
+  color: var(--border-color);
+}
+
+.lines .split.resizeable.horizontal .splitter::after {
+  background: transparent !important;
+}
+
+.lines .content-input,
+.lines textarea,
+.lines input {
+  border: solid 1px var(--border-color);
+  box-shadow: none; /* 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);*/
+  color: #777;
+}
+
+/* chat */
+.lines .flow-chat__container input.handle {
+  background: var(--background);
+  color: var(--normal);
+  box-shadow: none;
+  border-bottom: solid 1px var(--border-color);
+}
+
+.lines .flow-funcs__src {
+  background: transparent !important;
+  border: solid 1px var(--border-color-lighter);
+  text-shadow: none;
+  color: var(--normal);
+}
+
+.lines .flow-funcs__src b {
+  font-size: 1.2em;
+  text-shadow: none;
+  color: var(--primary);
+}
+
+/* left panel */
+.lines .hx-collapsible {
+  border-bottom: solid 1px var(--border-color-lighter);
+}
+
+.lines .hx-collapsible__header {
+  height: 50px;
+}
+
+.lines .flow-node__body {
+  fill: transparent;
+  stroke-width: 3px;
+}
+
+.lines .flow-node__label {
+  fill: var(--normal);
+}
+
+.lines .flow-node--selected .flow-node__label {
+  fill: var(--normal);
+}
+
+.lines .flow-panel__selector {
+  flex-basis: 51px;
+  border-bottom: 1px solid var(--border-color) !important;
+}
+
+.lines .flow-panel__selector .active {
+  color: var(--normal);
+  background: transparent;
+  position: relative;
+}
+
+.lines .flow-panel__selector .active::before {
+  content: " ";
+  position: absolute;
+  bottom: 0;
+  height: 3px;
+  left: 0;
+  right: 0;
+  background: var(--primary);
+}
+
+.lines .flow-main h1,
+.lines .flow-main h2,
+.lines .flow-main h3,
+.lines .flow-main h4 {
+  color: #222 !important;
+}

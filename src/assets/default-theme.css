@@ -1,0 +1,464 @@
+:root {
+  --header-background: #113244;
+  --header-color: #fff;
+  --background: #f4f4f4;
+  --background-transparent: rgba(240, 240, 240, 0.9);
+  --background-secondary: rgba(208, 208, 208, 1);
+  --background-tertiary: rgba(188, 188, 188, 1);
+  --normal: #333;
+  --normal-secondary: #999;
+  --primary: #5060a0;
+  --primary-darker: #405090;
+  --primary-lighter: #6080b0;
+  --primary-inverse: #fff;
+  --secondary: #666;
+  --secondary-inverse: #eee;
+  --node-label: #fff;
+  --node-socket: #444;
+  --node-socket--withvalue: #44f;
+  --link-hover: #f00;
+  --selector-background: rgba(0, 0, 200, 0.1);
+  --selector-color: var(--primary);
+  --transition-speed-fast: 0.2s;
+  --transition-speed: 0.4s;
+  --transition-speed-slow: 0.8s;
+  --node-selection: rgba(0, 0, 155, 1);
+  --border-color: rgba(50, 50, 50, 0.3);
+  --border-color-lighter: rgba(150, 150, 150, 0.17);
+}
+
+.vertical_sep {
+  flex-basis: 1px;
+  width: 1px;
+  height: 30px;
+  background: var(--primary);
+}
+
+.primary {
+  color: var(--primary);
+}
+
+.primary-inverse {
+  position: relative;
+  background: var(--primary) !important;
+  color: var(--primary-inverse) !important;
+}
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+button.active:hover::after,
+.primary-inverse:hover::after {
+  content: " ";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  transition: all var(--transition-speed);
+  opacity: 0.2;
+  background: #000;
+}
+
+.secondary {
+  color: var(--secondary);
+}
+
+.secondary-inverse {
+  background: var(--secondary);
+  color: var(--secondary-inverse);
+}
+
+button {
+  color: inherit;
+}
+
+button.active {
+  background: var(--primary);
+  color: var(--primary-inverse);
+}
+
+.hover {
+  position: relative;
+}
+
+button::after,
+.hover::after {
+  background: var(--normal);
+  opacity: 0;
+  transition: all var(--transition-speed);
+}
+
+button:hover::after,
+.hover:hover::after {
+  opacity: 0.1;
+}
+
+button:active,
+.hover:active {
+  text-shadow: 0 1px 1px var(--background);
+  box-shadow: inset 0 1px 3px 0 rgba(0, 0, 0, 0.3);
+}
+
+button:active::after,
+.hover:active::after {
+  opacity: 0.2;
+}
+
+.content-input {
+  word-wrap: break-word;
+  overflow: hidden;
+}
+
+.content-input,
+textarea,
+input {
+  padding: 20px;
+  outline: none;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  transition: all var(--transition-speed);
+  background: var(--background);
+  color: var(--normal);
+}
+
+/* only resize textarea vertical */
+textarea {
+  display: block;
+  resize: vertical;
+  height: min-content;
+}
+
+input::placeholder {
+  opacity: 0.4;
+}
+
+.flow-main h1,
+.flow-main h2,
+.flow-main h3,
+.flow-main h4 {
+  font-weight: bold;
+  color: var(--normal);
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  color: var(--header-color);
+  background: var(--header-background);
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+  overflow: visible;
+  z-index: 10;
+  transition: all var(--transition-speed);
+}
+
+.app-info {
+  color: var(--normal);
+}
+
+.app-watermark {
+  color: black;
+  opacity: 0.02;
+}
+
+.app-flow-container {
+  background: var(--background);
+  transition: all var(--transition-speed);
+}
+
+.flow-panel__container {
+  background: var(--background-secondary) !important;
+}
+
+/* Flow Funcs PANEL */
+.flow-funcs__control {
+  border-bottom: solid 1px var(--primary);
+}
+
+.flow-funcs__group {
+  background: var(--background-tertiary);
+}
+
+.flow-funcs__search input {
+  color: var(--normal);
+  border: none;
+  border-bottom: solid 1px var(--border-color-lighter);
+}
+
+.flow-funcs__src {
+  background: #777;
+  color: var(--node-label);
+  text-shadow: 0 0 14px #000, 0 0 4px #000;
+}
+
+.flow-funcs__src b {
+  text-shadow: 0 0 14px #000, 0 0 4px #000;
+}
+
+.flow-funcs__container .flow-funcs__header {
+  color: var(--normal);
+}
+
+.hx-toggle-arrow {
+  color: var(--normal-secondary);
+}
+
+.hx-toggle-arrow.active {
+  color: var(--primary);
+}
+
+.flow-funcs__inner {
+  display: flex;
+  flex: 1;
+  flex-flow: column;
+  justify-content: center;
+}
+
+.flow-funcs__inner .hx-collapsible {
+  transition: all var(--transition-speed);
+
+  /*border: none !important;*/
+}
+
+.hx-collapsible__header {
+  transition: all var(--transition-speed);
+}
+
+.flow-funcs__container .item {
+  color: var(--normal) !important;
+  border: none !important;
+}
+
+.flow-funcs__control .item {
+  color: var(--normal) !important;
+}
+
+.flow-container__control button {
+  color: var(--normal);
+}
+
+.flow-container__info {
+  color: var(--normal);
+}
+
+/*
+ * FLOW manager
+ */
+.flow-selector {
+  /* TODO: theme */
+  stroke: var(--selector-color);
+  fill: var(--selector-background);
+}
+
+/*
+ * LINKS
+ */
+.flow-link__visible {
+  opacity: 1;
+  stroke: var(--normal);
+}
+
+.flow-view:not(.activity)
+.flow-link:not(.flow-link--pointer):hover
+.flow-link__visible {
+  stroke: var(--link-hover);
+}
+
+.flow-link__head {
+  fill: var(--normal) !important;
+}
+
+/*
+ * TRIGGERS
+ */
+.flow-trigger-link__visible {
+  opacity: 0.5;
+  stroke: var(--normal);
+}
+
+.flow-view:not(.activity)
+.flow-trigger-link:not(.flow-trigger-link--pointer):hover
+.flow-trigger-link__visible {
+  stroke: var(--link-hover);
+}
+
+/*
+ * NODES
+ */
+.flow-node {
+  /*filter: url(#highlight-border);*/
+}
+
+.flow-node__label {
+  font-family: RobotoMono, monospace;
+  letter-spacing: -0.05em;
+  font-size: 14px;
+  fill: var(--node-label);
+}
+
+.flow-node__selection {
+  transition: all var(--transition-speed);
+}
+
+.flow-node--selected .flow-node__selection {
+  stroke: var(--primary);
+}
+
+.flow-node--dragging .flow-node__body,
+.flow-view:not(.activity) .flow-node:hover .flow-node__body {
+  stroke-width: 1.5;
+  stroke: var(--normal);
+}
+
+.flow-node__socket {
+  fill: var(--node-socket);
+  stroke: var(--node-socket);
+}
+
+.flow-linking.flow-node__socket--match,
+.flow-node__socket.flow-node__socket--match {
+  stroke: #2f2 !important;
+  fill: #2f2 !important;
+}
+
+.flow-node__socket-detail {
+  font-size: 12px;
+  font-weight: 100;
+  fill: var(--normal);
+}
+
+.flow-node__socket-detail--background {
+  fill: rgba(230, 230, 230, 0.7);
+}
+
+.flow-node__trigger {
+  fill: var(--node-socket);
+  stroke: var(--node-socket);
+}
+
+.flow-node__trigger--match {
+  stroke: #2f2 !important;
+  fill: #2f2 !important;
+}
+
+/*
+ * NODE ACTIVITY
+ */
+.flow-node__activity {
+  fill: white;
+
+  /* fill: var(--background-secondary); */
+}
+
+.flow-node__activity-icon > * {
+  stroke: var(--normal);
+}
+
+.flow-node__activity-time {
+  fill: var(--normal);
+}
+
+/*
+ * HX-MODAL
+ */
+.hx-modal__container {
+  background: var(--background-transparent);
+  color: var(--normal);
+  width: 70vw !important;
+  height: 80vh;
+  display: flex;
+  flex-flow: column;
+  overflow: hidden;
+}
+
+.hx-modal__header {
+  border-bottom: solid 1px var(--border-color);
+  flex-shrink: 0;
+  margin-bottom: 16px;
+}
+
+.hx-modal__body {
+  overflow-y: auto;
+  flex-grow: 1;
+  margin: 0;
+  padding: 0 20px !important;
+  padding: 20px;
+}
+
+.hx-modal__footer {
+  margin-top: 16px;
+  flex-shrink: 0;
+}
+
+/*
+ * CHAT
+ */
+.flow-chat {
+  background: var(--background-secondary);
+  color: var(--normal);
+}
+
+.flow-chat__area {
+  border-left: solid 1px var(--border-color);
+}
+
+.flow-chat__users {
+  border-left: solid 1px var(--border-color-lighter);
+}
+
+.flow-chat__toggle {
+  border: none;
+  background: var(--background-secondary);
+  border-top: solid 1px var(--border-color);
+  border-left: solid 1px var(--border-color);
+  border-bottom: solid 1px var(--border-color);
+}
+
+.flow-chat__messages .message {
+  border-bottom: solid 1px var(--border-color-lighter);
+}
+
+.flow-chat__messages .handle .name {
+  font-weight: bold;
+}
+
+.flow-chat__messages .message .text {
+  color: #777;
+}
+
+.flow-chat__messages .handle .time {
+  color: #999;
+}
+
+.flow-chat input.handle {
+  background: #777;
+  color: #fff;
+}
+
+.flow-chat input.message {
+  background: var(--background) !important;
+  color: var(--normal);
+}
+
+/***************************
+ * MARKDOWN
+ ****************/
+.markdown-body pre {
+  background: #333;
+  color: #eee;
+}
+
+.markdown-body pre * {
+  text-shadow: 0 -1px 1px #000;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}

@@ -1,0 +1,7 @@
+flow.hexasoftware.com {
+	tls off
+	rewrite / {
+		regexp ^[^.]*$
+		to /index.html
+	}
+}

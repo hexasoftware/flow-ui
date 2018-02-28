@@ -1,0 +1,106 @@
+<template>
+  <div
+    :class="{active: msgs.length>0 && active}"
+    class="hx-notification"
+    @transitionend="transitionend"
+  >
+    <p
+      :key = "i"
+      v-for="(m,i) of msgs"
+      v-html="m"/>
+  </div>
+
+</template>
+
+<script>
+import Vue from 'vue'
+// Component
+export default {
+  name: 'HxNotification',
+  data () {
+    return {
+      msgs: [],
+      active: true
+    }
+  },
+  mounted () {
+    this.$notify.on('notification', this.addMessage)
+  },
+  beforeDestroy () {
+    this.$notify.off('notification', this.addMessage)
+  },
+  methods: {
+    addMessage (m) {
+      if (this.msgs.length > 10) {
+        this.msgs.splice(0, 1)
+      }
+      this.msgs.push(m)
+      this.active = true
+
+      clearTimeout(this.timeout)
+      this.timeout = setTimeout(() => {
+        this.active = false
+      }, 5000)
+    },
+    transitionend (ev) {
+      if (this.active === false) this.msgs = [] // clear  before
+    }
+
+  }
+}
+
+// Plugin
+Vue.use({
+  install (Vue, options) {
+    if (Vue.prototype.$notify) {
+      return
+    }
+    const ebus = new Vue()
+    Vue.prototype.$notify = function (msg) {
+      ebus.$emit('notification', msg)
+    }
+    Vue.prototype.$notify.on = ebus.$on.bind(ebus)
+    Vue.prototype.$notify.once = ebus.$once.bind(ebus)
+    Vue.prototype.$notify.off = ebus.$off.bind(ebus)
+  }
+})
+
+</script>
+<style>
+/* notifications */
+.hx-notification {
+  pointer-events:none;
+  user-select:none;
+  opacity:0;
+  position: fixed;
+  z-index: 1000;
+  padding: 20px;
+  width: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 10%;
+  background: var(--normal);
+  color: var(--background);
+  border: solid 1px rgba(150, 150, 150, 0.3);
+  transition: opacity var(--transition-speed);
+}
+
+.hx-notification b {
+  color: var(--primary-lighter);
+}
+
+/* trick to maintain under mouse */
+.hx-notification:hover {
+  border: solid 1px var(--primary);
+  pointer-events:initial !important;
+  user-select:initial !important;
+  opacity:0.8 !important;
+}
+
+.hx-notification.active {
+  pointer-events:initial;
+  user-select:initial;
+  opacity:0.6;
+}
+
+</style>

@@ -1,0 +1,136 @@
+<template>
+  <g>
+    <!--<rect
+      class="flow-pan-zoom__grid"
+      width="100%"
+      height="100%"
+      fill="url(#grid)"
+      />-->
+    <rect
+      ref="transformer"
+      class="flow-pan-zoom__transformer"
+      width="100%"
+      height="100%"
+      @mousedown="dragStart"/>
+    <g
+      class="flow-pan-zoom__transformed"
+      ref="transform"
+      v-bind="transformProps">
+      <slot/>
+    </g>
+  </g>
+
+</template>
+<script>
+import utils from '@/utils/utils'
+
+export default {
+  name: 'FlowPanZoom',
+  props: {
+    value: {type: Object, default: () => { return {x: 0, y: 0, zoom: 1} }}
+  },
+  data () {
+    return {
+      zoom: this.value.zoom,
+      x: this.value.x,
+      y: this.value.y,
+      moving: false
+    }
+  },
+  computed: {
+    transformProps () {
+      const transString = 'matrix(' + [
+        this.zoom, 0,
+        0, this.zoom,
+        this.x, this.y
+      ].join(',') + ')'
+
+      return {
+        transform: transString
+      }
+    }
+  },
+
+  watch: {
+    value: {
+      handler () {
+        this.zoom = this.value.zoom
+        this.x = this.value.x
+        this.y = this.value.y
+      },
+      deep: true
+    }
+  },
+  mounted () {
+    this.$el.addEventListener('wheel', this.wheel)
+  },
+  beforeDestroy () {
+    this.$el.removeEventListener('wheel', this.wheel)
+  },
+  methods: {
+    // panStart
+    dragStart (ev) {
+      document.activeElement && document.activeElement.blur()
+      if (!(ev.button === 1 || (ev.button === 0 && ev.ctrlKey))) return // first button
+      if (ev.target !== this.$refs.transformer) return
+      ev.stopPropagation()
+
+      utils.createDrag({
+        drag: (ev) => {
+          this.moving = true
+          this.update(this.x + ev.movementX, this.y + ev.movementY)
+        },
+        drop: (ev) => {
+          this.moving = false
+        }
+      })
+    },
+    wheel (ev) {
+      ev.preventDefault()
+      let deltaY = (ev.deltaY > 0) ? 1 : -1
+      deltaY *= (ev.shiftKey) ? 0.3 : 0.07
+      const elRect = this.$refs.transformer.getBoundingClientRect()
+      const oX = ev.clientX - elRect.left
+      const oY = ev.clientY - elRect.top
+      const z = Math.max(this.zoom - (deltaY * this.zoom), 0.1)
+
+      var curX = this.x
+      var curY = this.y
+      var scaleD = z / this.zoom // delta
+
+      var nx = scaleD * (curX - oX) + oX
+      var ny = scaleD * (curY - oY) + oY
+
+      this.update(nx, ny, z)
+    },
+    update (x, y, zoom) {
+      if (x) this.x = x
+      if (y) this.y = y
+      if (zoom) this.zoom = zoom
+
+      this.$emit('input', {x: this.x, y: this.y, zoom: this.zoom})
+    },
+    transformedPoint (point) {
+      const ctm = this.$refs.transform.getCTM()
+      return point.matrixTransform(ctm.inverse())
+    }
+  }
+}
+
+</script>
+
+<style>
+.flow-pan-zoom__transformer {
+  fill:transparent;
+}
+
+.flow-pan-zoom__transformed {
+  /*transition: transform 0.45s ease;*/
+}
+
+.flow-pan-zoom__grid {
+  fill:transparent;
+  pointer-events:none;
+}
+
+</style>

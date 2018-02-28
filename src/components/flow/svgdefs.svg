@@ -1,0 +1,38 @@
+<defs>
+    <marker id="head" class="flow-link__head" orient="auto" markerWidth="6" markerHeight="8" refX="0.1" refY="3">
+      <path stroke="context-stroke" d="M0,0 V6 L6,3 Z"/>
+    </marker>
+
+		<filter x="-.1" y="-.2" width="1.2" height="1.4" id="solid-white" class="flow-socket__detail-solid">
+      <feFlood flood-color="rgba(230,230,230,0.7)"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+		<filter x="-.1" y="-.2" width="1.2" height="1.4" id="solid-dark" class="flow-socket__detail-solid">
+      <feFlood flood-color="rgba(30,30,30,0.7)"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="highlight-border" x="-50%" y="-50%" width="200%" height="200%" filterUnits="userSpaceOnUse" >
+      <feMorphology in="SourceGraphic" result="MORPH" operator="dilate" radius="1" />
+      <feColorMatrix in="MORPH" result="BORDER" type="matrix" values=".2 0 0 0 0, 0 .2 0 0 0, 0 0 .2 0 0, 0 0 0 .7 0"/>
+      <feColorMatrix result = "matrixOut" in = "SourceGraphic" type = "matrix" values = ".5 0 0 0 0,  0 .5 0 0 0,  0 0 .5 0 0,  0 0 0 1 0"/>
+      <feGaussianBlur result="blurOut" in="matrixOut" stdDeviation="2" />
+      <feMerge>
+        <feMergeNode in="blurOut"/>
+        <feMergeNode in="BORDER"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+
+    </filter>
+    <filter id="highlight" x="-50%" y="-50%" width="200%" height="200%" filterUnits="userSpaceOnUse" >
+      <feColorMatrix result = "matrixOut" in = "SourceGraphic" type = "matrix" values = "2 0 0 0 0  0 2 0 0 0  0 0 2 0 0  0 0 0 1 0"/>
+      <feGaussianBlur result="blurOut" in="matrixOut" stdDeviation="4" />
+      <feMerge>
+        <feMergeNode in="blurOut"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+
+    </filter>
+    <filter id="drag-shadow" x="-100%" y="-100%" width="300%" height="300%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3"/>
+    </filter>
+  </defs>

@@ -1,0 +1,63 @@
+.dark {
+  --header-background: #212121;
+  --header-color: #eee;
+  --background: #303030;
+  --background-transparent: rgba(48, 48, 48, 0.9);
+  --background-secondary: #424242;
+  --background-tertiary: #323232;
+  --normal: #bfbfbf;
+  --normal-secondary: #777;
+
+  /* --primary: #f57c00 ; */
+  --primary: #c55c00;
+  --primary-darker: #a53c00;
+  --primary-lighter: #ff8c20;
+  --secondary-inverse: var(--normal);
+  --node-label: var(--normal);
+  --node-socket: var(--primary);
+  --node-socket--withvalue: #44f;
+  --link-hover: var(--primary);
+  --selector-background: rgba(200, 150, 50, 0.1);
+  --selector-color: var(--primary);
+  --node-selection: var(--primary);
+  --border-color: rgba(150, 150, 150, 0.2);
+  --border-color-lighter: rgba(100, 100, 100, 0.3);
+}
+
+.dark .primary-inverse {
+  background: var(--primary) !important;
+}
+
+.dark .flow-node__body {
+  fill: transparent;
+  stroke-width: 3;
+  opacity: 0.5;
+}
+
+.dark .flow-node__socket-detail--background {
+  fill: rgba(30, 30, 30, 0.7);
+}
+
+.dark .flow-node--dragging .flow-node__body,
+.dark .flow-view:not(.activity) .flow-node:hover .flow-node__body {
+  stroke-width: 2;
+  stroke: var(--primary);
+}
+
+.dark .content-input,
+.dark input {
+  outline: none;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.4);
+}
+
+.dark .flow-node__activity--running > * {
+  stroke: yellow;
+}
+
+.dark .flow-node__activity {
+  fill: var(--background-secondary);
+}
+
+.dark .flow-funcs__src {
+  color: #fff;
+}
