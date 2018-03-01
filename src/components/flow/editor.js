@@ -36,6 +36,9 @@ export default {
   },
   computed: {
     ...mapGetters('flow', ['registry', 'activity', 'nodeData', 'nodeById', 'nodeSelection']),
+    version () {
+      return window._flow_version_
+    },
     panzoomIdentity () {
       for (let i = 0; i < 16; i++) {
         if (this.panzoomCTM[i] !== affIdentity[i]) {

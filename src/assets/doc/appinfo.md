@@ -18,4 +18,4 @@
 * **Remove Link**: Middle button click on the link
 * **Create a portal**: Drag an output socket from a node to an empty space check <a href="readme#portal-from" target="_blank">portals</a> on readme for further information
 
-<small>&copy; Luis Figueiredo (luisf@hexasoftware.com)</small>
+<small>&copy; Luis Figueiredo (luisf@hexasoftware.com) v: 0.0.1</small>
