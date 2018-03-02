@@ -42,15 +42,8 @@ export default {
   computed: {
     transformProps () {
       const transString = 'matrix3d(' + this.transform.join(',') + ')'
-      /* const transString = 'matrix(' + [
-        this.zoom, 0,
-        0, this.zoom,
-        this.x, this.y
-      ].join(',') + ')' */
-
       return {
         style: 'transform: ' + transString + ';'
-        // transform: transString
       }
     }
   },
@@ -59,9 +52,6 @@ export default {
     value: {
       handler (val) {
         this.transform = val
-        /* this.zoom = this.value.zoom
-        this.x = this.value.x
-        this.y = this.value.y */
       }
     }
   },

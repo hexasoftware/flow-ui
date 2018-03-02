@@ -7,7 +7,7 @@
     }"
     :status="status"
     :transform="nodePos"
-    @mousedown.stop.prevent="nodePointerDown"
+    @mousedown.prevent="nodePointerDown"
     @contextmenu.capture.prevent="nodeRightClick"
     @dblclick="nodeDoubleClick"
   >
@@ -202,7 +202,11 @@ export default {
     labelWrap () {
       let wrapThreshold = 8 // initial wrap threshold
       const opt = nodeSize.shapeOpts[this.style.shape] || nodeSize.shapeOpts.default
-      return utils.textWrap(this.node.label, wrapThreshold, opt.textWrap)
+      let label = this.node.label
+      if (!label || label === '') {
+        label = this.node.src
+      }
+      return utils.textWrap(label, wrapThreshold, opt.textWrap)
     },
     labelProps () {
       const ldim = nodeSize.labelDim(this.node)

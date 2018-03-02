@@ -30,9 +30,6 @@ export default {
     flowService.nodeRemove(nodes)
     ctx.dispatch(m.DOCUMENT_SYNC)
   },
-  [m.NODE_INSPECT] ({commit}, nodeId) {
-    commit(m.NODE_INSPECT, nodeId)
-  },
   [m.NODE_PROCESS] (ctx, nodeIds) {
     // Should be an array now
     flowService.nodeProcess(nodeIds)

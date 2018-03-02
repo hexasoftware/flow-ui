@@ -10,12 +10,11 @@
 * **Visualize sockets**: Press `shift` key to temporarily visualize sockets
 * **New Node**: Create a node by dragging a fn from left panel into area
 * **NEW: Clone node**: `ctrl`+drag selected nodes to duplicate
-* **Remove Node**: Middle click on a node to remove it
-* **Inspect node**: Double click on a node to get detailed information
+* **Remove Node**: Right click on a node or selected nodes and select delete from context menu (new 02-Mar-2017)
 * **Move Node**: Mouse click and drag
 * **Links**: Press `shift` and Drag from a node/socket to a socket highlighted in green
 * **Links(alternative)**: Toggle socket visualisation in the panel and Drag from a socket to a socket highlighted in green
-* **Remove Link**: Middle button click on the link
+* **Remove Link**: Middle mouse button click on the link
 * **Create a portal**: Drag an output socket from a node to an empty space check <a href="readme#portal-from" target="_blank">portals</a> on readme for further information
 
 <small>&copy; Luis Figueiredo (luisf@hexasoftware.com) v: 0.0.1</small>

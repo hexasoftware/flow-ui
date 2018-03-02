@@ -43,11 +43,9 @@
             </div>
             <flow-editor
               ref="flowManager"
-              @nodeInspect="nodeInspectStart(...arguments)"
               @nodeProcess="nodeProcess(...arguments)"
-              @nodeDoubleClick="nodeInspectStart(...arguments,true)"
+              @nodeDoubleClick="panel='inspector'"
               @nodeViewData="modalData=true"
-              @activityPointerDown="nodeInspectStart($event,true,true)"
               @documentSave="documentSave"
 
               width="100%"
@@ -137,39 +135,6 @@ export default {
   },
   methods: {
     ...mapActions('flow', ['NODE_INSPECT', 'NOTIFICATION_ADD']),
-    nodeInspectStart (nodeId, changePane, showData) { // node
-      this.NODE_INSPECT(nodeId)
-
-      if (showData) {
-        this.modalData = true
-      }
-      if (changePane) {
-        this.panel = 'inspector'
-      }
-      if (this.panel !== 'inspector') {
-
-      }
-
-      // this.nodeInspect = node
-
-      // if (!changePane) { return }
-      /* this.$nextTick(() => {
-        // panel input
-        if (!this.$refs.inspector) { }
-        const insp = this.$refs.inspector
-        let targetInput = insp.$refs.label
-        if (insp.$refs.inputs && insp.$refs.inputs.length > 0) {
-          targetInput = insp.$refs.inputs[0]
-        } else if (insp.$refs.propss && insp.$refs.props.length > 0) {
-          targetInput = insp.$refs.props[0]
-        }
-        if (!targetInput) {
-          return
-        }
-        targetInput.setSelectionRange(0, targetInput.value.length)
-        targetInput.focus()
-      }) */
-    },
     funcsSizeUpdate (ev, size) {
       this.funcsSize = size
     },

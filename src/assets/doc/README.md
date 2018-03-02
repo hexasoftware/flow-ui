@@ -212,8 +212,8 @@ generate code based on a flow should be simple as we have the function signature
 
 > Testing
 
-Named portal would connect a node to another without any link, this way we can
-have clean links without crossovers
+~~Named portal would connect a node to another without any link, this way we can
+have clean links without crossovers~~
 
 ### Recursive registering
 
@@ -225,11 +225,11 @@ the registry/flow yet
 
 ### Multiple node editing
 
-> TODO
+> Testing
 
-While on multiple selection the inspector can show common properties and editing
+~~While on multiple selection the inspector can show common properties and editing
 those will affect all nodes in the selection, RUN would be disabled in multiple
-selection
+selection~~
 
 ### Dynamic context menu
 
@@ -244,9 +244,9 @@ would be good to have the same by right clicking in other subjects:
   * toggle On: error
   * toggle On: success
 * **Editor**
-  * toggle Show Detail
-  * toggle Show Activity
-  * toggle Show Triggers
+  * ~~toggle Show Detail~~
+  * ~~toggle Show Activity~~
+  * ~~toggle Show Triggers~~
   * Reset view
 
 ### Actions
@@ -272,14 +272,15 @@ nodes to be processed in an action having possible multiple nodes per action
 
 ### UX/UI
 
+* UX/UI: Show errors on modal data or inspector
 * UX/UI: Create Undo behaviour, Possibly easy since this is using vuex (centralized state management)
 * UX/UI: Special visualisers/nodes to display information (images, datatables, graphs);
 * UX/UI: Ability to group nodes into a single box exposing inputs and outputs;
 * UX/UI: Implement touch;
 * UX/UI: Drop link in node to link to the next compatible input;
 * UX/UI: Find a way to highlight/linked portals for easy user reference
-* UX/UI: Multiple selection inspecting [idea](#multiple-node-editing)
-* UX/UI: Dynamic Context menu
+  ~~\* UX/UI: Multiple selection inspecting [idea](#multiple-node-editing)~~
+* UX/UI: Dynamic Context menu (now works on nodes and editor)
 * UX/UI: link/node animation synchronization on collaborative environment
 * ~~UX/UI: Portals to clean graph crossing~~ (testing);
 * ~~UX/UI: `Shift` key to merge group selections~~;
@@ -305,20 +306,25 @@ nodes to be processed in an action having possible multiple nodes per action
 
 ## Changelog
 
-27/02/2018
+02/Mar/2018
+
+* **UI/UX**: Multi selection inspector
+* **UI/UX**: Middle click do remove node disabled
+
+27/Feb/2018
 
 * **UI/UX**: removed SVGMatrix favouring CSSMatrix and manual matrix calculations
   Area now rotates around a point, although this is not really useful
 * **UI/UX**: improved selection behaviour
 * **UI/UX**: Added context menu for editor area, removed some buttons from top button bar
 
-25/02/2018
+25/Feb/2018
 
 * **UI/UX**: Added image visualization if the content result is a dataurl
 * **UI/UX**: Removed flow-ui Output node source, the button `run` which is now
   Process will process and fetch data from selected nodes
 
-18/02/2018
+18/Feb/2018
 
 * **frontend**: Refactored nodes and links to improve performance with lots of elements
   * Cleaned up some areas while refactoring, less code
@@ -326,7 +332,7 @@ nodes to be processed in an action having possible multiple nodes per action
   * moved some display logic to respective areas, as nodeProps from editor to node
   * Cached node dimensions for performance
 
-15/02/2018
+15/Feb/2018
 
 * **Selection**: Added clone using ctrl + drag will clone selected nodes
 * **Selection**: Added drag threshold, only start dragging if pointer goes over a threshold value
@@ -335,7 +341,7 @@ nodes to be processed in an action having possible multiple nodes per action
 * **Inspector**: Added result button to inspector
 * **Activity**: Added new activity icon if the node has data
 
-13/02/2018
+13/Feb/2018
 
 * **Selection**: Animated selection areas to improve visibility
 * **Portal node**: dragging from a output socket to an empty area will create a portal

@@ -94,6 +94,7 @@ input {
   width: 100%;
   border: none;
   padding: 10px;
+  font-family: Roboto, sans-serif;
 }
 
 textarea {

@@ -92,8 +92,9 @@
             <div class="hover item" @click="NODE_REMOVE(nodeSelection)">Delete ({{ selectionCount }})</div>
           </div>
           <!-- for the context -->
-          <div v-else>
+          <div v-else-if="d.userData.node">
             <div class="hover item" @click="nodeProcess(d.userData.node.id)">Run</div>
+            <div class="hover item" @click="NODE_SELECTION_SET([d.userData.node]);$emit('nodeViewData')">View</div>
             <hr>
             <div class="hover item" @click="nodeRemove(d.userData.node.id)">Delete</div>
           </div>

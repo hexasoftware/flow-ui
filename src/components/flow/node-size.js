@@ -1,4 +1,3 @@
-
 import store from '@/store'
 import utils from '@/utils/utils'
 
@@ -24,11 +23,15 @@ export default {
   },
 
   labelDim (node) {
+    let nodeLabel = node.label
+    if (!nodeLabel || nodeLabel === '') {
+      nodeLabel = node.src
+    }
     const shape = this.shape(node)
     let wrapThreshold = 8 // initial wrap threshold
     const opt = this.shapeOpts[shape] || this.shapeOpts.default
 
-    const label = utils.textWrap(node.label, wrapThreshold, opt.textWrap)
+    const label = utils.textWrap(nodeLabel, wrapThreshold, opt.textWrap)
 
     let charWidth = 0
     let charHeight = label.length

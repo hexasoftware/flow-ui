@@ -8,7 +8,6 @@ export default {
     links: [],
     triggers: []
   },
-  nodeInspect: {},
   nodeSelection: [],
   registry: {},
 

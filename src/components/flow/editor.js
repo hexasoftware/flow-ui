@@ -55,7 +55,7 @@ export default {
       return {
         'flow-linking': this.linking || this.stickySockets,
         'flow-triggers': this.triggerLinking || this.stickyTriggers,
-        'activity': this.dragging || this.pointerLink.active,
+        'activity': this.dragging || this.pointerLink.active || this.pointerTriggerLink.active,
         'flow-node--activity': this.nodeActivity,
         'selecting': !!this.selector
       }
@@ -110,8 +110,7 @@ export default {
       if (Object.keys(this.nodeSelection).length === 1) { singleId = Object.keys(this.nodeSelection)[0] }
       switch (ev.key) {
         case 'Enter':
-          if (!singleId) { return }
-          this.nodeInspect(singleId, true)
+          if (!singleId) { }
           break
         case 'Delete':
           if (Object.keys(this.nodeSelection).length === 0) { return }
@@ -300,25 +299,17 @@ export default {
       this.NODE_REMOVE([node])
     },
     // Is this used?
-    nodeInspect (nodeId, force) {
-      this.$emit('nodeInspect', nodeId, force)
-    },
     nodePointerDown (ev, nodeId) {
       document.activeElement && document.activeElement.blur()
+      if (ev.button !== 0) return // first button bubble
       const tnode = this.nodeById(nodeId)
-      // Confirm
-      if (ev.button === 1) {
-        this.NODE_REMOVE([tnode])
-        return
-      }
-      if (ev.button !== 0) return // first button
+      ev.stopPropagation()
       if (ev.shiftKey) {
         if (this.registry[tnode.src].output) {
           this.socketPointerDown(tnode.id, ev, {out: 0})
         }
         return
       }
-      this.nodeInspect(tnode.id)
       let selectionToggle = false
       let prevSelection = Object.assign({}, this.nodeSelection)
       let wasSelected = !!this.nodeSelection[tnode.id]
@@ -477,7 +468,6 @@ export default {
     },
     nodeProcess (nodeId) {
       // const n = this.nodeById(nodeId)
-      this.nodeInspect(nodeId, true)
       this.NODE_PROCESS([nodeId])
       // this.NODE_SELECTION_SET([n])
       // this.nodeSelectionProcess()

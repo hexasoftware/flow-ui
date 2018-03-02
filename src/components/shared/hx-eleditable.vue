@@ -2,8 +2,9 @@ Content editable wrapper
 <template>
   <pre
     tabindex="1"
-    class="content-input"
+    class="hx-eleditable content-input"
     contentEditable="true"
+    :placeholder="placeholder"
     v-html="local"
     @focus="focus"
     @input="update"
@@ -13,7 +14,8 @@ Content editable wrapper
 <script>
 export default {
   props: {
-    'value': {type: String, default: ''}
+    'value': {type: String, default: ''},
+    'placeholder': {type: String, default: ''}
   },
   data () {
     return {
@@ -53,4 +55,17 @@ export default {
 }
 </script>
 <style>
+.hx-eleditable{
+  position:relative;
+}
+
+.hx-eleditable[contenteditable=true]:empty:before{
+  cursor:text;
+  position:absolute;
+  top:0;right:0;left:0;bottom:0;
+  padding:10px;
+  opacity:0.35;
+  content: attr(placeholder);
+  display: block;
+}
 </style>

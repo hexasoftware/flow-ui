@@ -9,7 +9,7 @@
         v-for="n of nodes"
         :key="'data'+n.id"
       >
-        Node: [{{ n.id }}] - {{ n.label }}
+        <div class="flow-model-data__item--nodeid">Node: [{{ n.id }}] - {{ n.label }}</div>
         <img
           v-if="activity.nodes[n.id] && activity.nodes[n.id].data && activity.nodes[n.id].data.toString().startsWith('data:image')"
           :src="activity.nodes[n.id].data">
@@ -44,6 +44,14 @@ export default {
         return 'image'
       }
       return 'raw'
+    },
+    nodeData () {
+      return (nId) => {
+        if (!this.nodeActivity) { return }
+        if (!this.nodeActivity[nId]) { return }
+        if (!this.nodeActivity[nId].data) { return }
+        return this.nodeActivity[nId].data
+      }
     },
     data () {
       // This way we can parse data and show it somehow

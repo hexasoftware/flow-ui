@@ -28,7 +28,6 @@ export default {
   /* nodeSelection: state => {
     return Object.keys(state.nodeSelection).map(k => state.nodeSelection[k])
   }, */
-  nodeSelection: state => state.nodeSelection,
-  nodeInspect: state => state.nodeInspect
+  nodeSelection: state => state.nodeSelection
 
 }

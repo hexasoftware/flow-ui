@@ -71,10 +71,7 @@ export default {
       // Object.assign(state.nodeData.nodes[ni], node)
       Object.assign(cached.node, node)
       // Vue.set(state.nodeData.nodes, ni, node)
-      if (node.id === state.nodeInspect.id) {
-        // Update node inspect
-        state.nodeInspect = node
-      }
+      // should update NodeSelection?
     }
     updateNodeCache(state, nodes)
   },
@@ -85,6 +82,9 @@ export default {
   [m.NODE_REMOVE] (state, nodes) {
     for (let k in nodes) {
       const node = nodes[k]
+
+      // Remove from selection
+      Vue.delete(state.nodeSelection, node.id)
       // Need to search by ID since its manipulating the list
       const ni = state.nodeData.nodes.findIndex(n => n.id === node.id)
       state.nodeData.links = state.nodeData.links
@@ -94,10 +94,6 @@ export default {
       state.nodeData.nodes.splice(ni, 1)
     }
     updateNodeCache(state)
-  },
-  [m.NODE_INSPECT] (state, nodeId) {
-    const node = state.nodeData.nodes.find(n => n.id === nodeId)
-    state.nodeInspect = node
   },
   [m.NODE_SELECTION_CLEAR] (state) {
     state.nodeSelection = {}
