@@ -171,7 +171,6 @@ export default {
   },
   computed: {
     ...mapGetters('flow', ['nodeCache', 'nodeData', 'registry', 'activity', 'nodeById', 'nodeSelection', 'nodeInputPos', 'nodeOutputPos']),
-
     nodePos () {
       return `translate(${this.node.x}, ${this.node.y})`
     },
@@ -253,22 +252,6 @@ export default {
         })
       }
       return ret
-
-      /* return (i) => {
-        let defaultInput = this.node.defaultInputs[i]
-
-        const inp = this.inputs[i]
-        const match = this.match.type === 'socket-in' && (inp.type === this.match.dtype || this.match.dtype === 'interface {}' || inp.type === 'interface {}')
-
-        const {x, y} = this.inputPos(i)
-        return {
-          class: {
-            'flow-node__socket--match': match,
-            'flow-node__socket--withvalue': !!defaultInput
-          },
-          transform: `translate(${x} ${y})`
-        }
-      } */
     },
     outputProps () {
       return (i) => {

@@ -206,7 +206,10 @@ export default {
           // const inp = this.registry[node.src].inputs[p]
           if (this.inputs[node.src] === undefined) this.inputs[node.src] = {nodes: [], types: this.registry[node.src].inputs, values: []}
 
-          this.inputs[node.src].nodes.push(node)
+          if (this.inputs[node.src].nodes.indexOf(node) === -1) {
+            // Add if doesn't exists
+            this.inputs[node.src].nodes.push(node)
+          }
           // Separated by src
           if (this.inputs[node.src].values[p] === undefined) {
             this.inputs[node.src].values[p] = node.defaultInputs[p]
